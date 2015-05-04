@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+		<title>Template Test</title>
+	</head>
+	<body>
+		<div id="results"></div>
+	</body>
+	<script id="template" type="text/tmpl">
+	<% if (title === 'liuzesen') { %>
+		<h1>I have the head</h1>
+	<% } %>
+	<h1><%=title%></h1>
+	<ul>
+	    <% for (var i = 0, l = list.length; i < l; i ++) { %>
+	        <li>用户: <%=list[i].user %> / 网站：<%=list[i].site%></li>
+	    <% } %>
+	</ul>
+	<h2><%= end %></h2>
+	</script>
+	<script type="text/javascript" src="../dist/tmpl.js"></script>
+	<script type="text/javascript">
+	window.onload = function() {
+		// 数据量
+		var length = 100;
+		// 渲染次数
+		var number = 10000;
+		var data = {
+		    list: []
+		};
+		for (var i = 0; i < length; i ++) {
+		    data.list.push({
+		        index: i,
+		        user: '<strong style="color:blue;">Test</strong>',
+		        site: 'http://liuzesen.github.io'
+		    }); 
+		};
+		data.title = "liuzesen";
+		data.end = "end";
+
+		var results = document.getElementById('results');
+
+		console.time('render');
+		var template = new Tmpl('template');
+		results.innerHTML = template.render(data);
+		for (var i = 0; i < number; i++) {
+			template.render(data);
+		}
+		console.timeEnd('render');
+	}
+	</script>
+</html>

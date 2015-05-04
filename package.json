@@ -1,0 +1,24 @@
+{
+	"name": "tmpl",
+	"version": "0.0.1",
+	"decription": "小巧的模板引擎，仅支持原生的模板语言，功能比较单一",
+	"author": {
+		"name" : "Liuzesen",
+		"email" : "124005330@qq.com",
+		"url" : "http://github.io/liuzesen"
+	},
+	"repository": {
+  		"type" : "git",
+  		"url" : "https://github.com/liuzesen/tmpl.git"
+  	},
+  	"dependencies": {
+  		"gulp": "~3.8.11",
+  		"gulp-uglify": "~1.2.0",
+  		"gulp-concat": "~2.5.2",
+  		"gulp-jshint": "~1.10.0",
+  		"jshint-stylish": "~1.0.1"
+  	},
+  	"devDependencies": {
+
+  	}
+}
