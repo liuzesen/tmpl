@@ -9,17 +9,18 @@
 		<div id="results"></div>
 	</body>
 	<script id="template" type="text/tmpl">
+	<h1><%=end%></h1>
 	<% if (title === 'liuzesen') { %>
 		<h1>I have the head</h1>
 	<% } %>
 	<p><%=address[0] %></p>
-	<h1><%=title%></h1>
 	<ul>
 	    <% for (var i = 0, l = list.length; i < l; i ++) { %>
+	    	<p><%=title%></p>
 	        <li>用户: <%=list[i].user %> / 网站：<%=list[i].site%></li>
 	    <% } %>
 	</ul>
-	<h2><%= end %></h2>
+	<h2><%=end%></h2>
 	</script>
 	<script type="text/javascript" src="../dist/tmpl.js"></script>
 	<script type="text/javascript">
