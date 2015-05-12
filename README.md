@@ -40,5 +40,20 @@ data: JSON字面量。
 
 示例：
 ```
-var tmpl = new Tmpl
+var data = {
+    list: []
+};
+for (var i = 0; i < length; i ++) {
+    data.list.push({
+        index: i,
+        user: '<strong style="color:blue;">Test</strong>',
+        site: 'http://liuzesen.github.io'
+    }); 
+};
+data.title = "liuzesen";
+data.end = "end";
+data.address = ['广州', '佛山'];
+var tmpl = new Tmpl('template');
+var tmplStr = tmpl.render(data);
 ```
+以上就是所有的接口。
