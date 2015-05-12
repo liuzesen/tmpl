@@ -5,15 +5,19 @@
 	
 	var isDefined = function(o) { return typeof o !== 'undefined'; };
 
+	var keyValue = /(?:[\w$_]*)\s*=\s*([a-zA-Z$_][0-9a-zA-Z$_]*)/g, // 匹配原生语句中等号右边的对象名称
+		bracket = /(<%=|<%)(\s*)(.*?)(\s*%>)/g, // 匹配<%= %> 或者 <% %>
+		varValue = /[a-zA-Z$_][0-9a-zA-Z$_]*/; // 匹配JS变量名
+
 	var parsing = function(tmpl) {
-		var needClose = false;
-		var headCode = '\'use strict\'; var ';
-		var outCode = 'out="";';
-		var mainCode = '';
-		var endCode = '\nreturn out;';
+		var needClose = false,
+			headCode = '\'use strict\'; var ',
+			outCode = 'out="";',
+			mainCode = '',
+			endCode = '\nreturn out;';
 
 		var parseNativeCode = function(nativeCode) {
-			nativeCode.replace(/(?:[\w$_]*)\s*=\s*([a-zA-Z$_][\w]*)/g, function(full, key) {
+			nativeCode.replace(keyValue, function(full, key) {
 				headCode += key + '=$$data.' + key + ',';
 			});
 		};
@@ -26,14 +30,14 @@
 		};
 
 		var curPos = 0;
-		var regex = /(<%=|<%)(\s*)(.*?)(\s*%>)/g;
-		tmpl.replace(regex, function(full, lBracket, white, capture, rBracket, lBracketPos) {
+		tmpl.replace(bracket, function(full, lBracket, white, capture, rBracket, lBracketPos) {
 			
 			parseStaticHtml(curPos, lBracketPos);
 
 			if (lBracket.length === 3) {
 				if (!needClose) {
-					headCode += capture + '=$$data.' + capture + ',';
+					var variable = capture.match(varValue)[0];
+					headCode += variable + '=$$data.' + variable + ',';
 				}
 				mainCode += 'out+=' + capture + ';';
 			} else if (lBracket.length === 2) {

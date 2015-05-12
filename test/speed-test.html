@@ -12,6 +12,7 @@
 	<% if (title === 'liuzesen') { %>
 		<h1>I have the head</h1>
 	<% } %>
+	<p><%=address[0] %></p>
 	<h1><%=title%></h1>
 	<ul>
 	    <% for (var i = 0, l = list.length; i < l; i ++) { %>
@@ -39,6 +40,7 @@
 		};
 		data.title = "liuzesen";
 		data.end = "end";
+		data.address = ['广州', '佛山'];
 
 		var results = document.getElementById('results');
 
