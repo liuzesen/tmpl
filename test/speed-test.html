@@ -12,11 +12,13 @@
 	<h1><%=end%></h1>
 	<% if (title === 'liuzesen') { %>
 		<h1>I have the head</h1>
+	<% } else { %>
+		<h1>I do not have the head</h1>
 	<% } %>
 	<p><%=address[0] %></p>
 	<ul>
 	    <% for (var i = 0, l = list.length; i < l; i ++) { %>
-	    	<p><%=title%></p>
+	    	<%=title%>
 	        <li>用户: <%=list[i].user %> / 网站：<%=list[i].site%></li>
 	    <% } %>
 	</ul>
@@ -39,7 +41,7 @@
 		        site: 'http://liuzesen.github.io'
 		    }); 
 		};
-		data.title = "liuzesen";
+		data.title = "liuzesen1";
 		data.end = "end";
 		data.address = ['广州', '佛山'];
 

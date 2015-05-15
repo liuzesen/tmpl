@@ -40,8 +40,7 @@
 		bracket = /(<%=|<%)(\s*)(.*?)(\s*%>)/g; // 匹配<%= %> 或者 <% %>
 
 	var parsing = function(tmpl) {
-		var needClose = false,
-			headCode = '\'use strict\'; var ',
+		var headCode = '\'use strict\'; var ',
 			outCode = 'out="";',
 			mainCode = '',
 			endCode = '\nreturn out;';
@@ -69,15 +68,12 @@
 		tmpl.replace(bracket, function(full, lBracket, white, capture, rBracket, lBracketPos) {
 			
 			parseStaticHtml(curPos, lBracketPos);
+			parseNativeCode(capture);
 
 			if (lBracket.length === 3) {
-				mainCode += 'out+=' + (needClose ? '' : '$$data.') + capture + ';';
+				mainCode += 'out+=' + capture + ';';
 			} else if (lBracket.length === 2) {
-				if (!needClose) {
-					parseNativeCode(capture);
-				}
 				mainCode += capture;
-				needClose = !needClose;
 			}
 
 			curPos = lBracketPos + lBracket.length + white.length + capture.length + rBracket.length;
